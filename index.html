@@ -3,64 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Virtual Library</title>
+    <title>Visual Book Library</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <h1>📚 My Data Science Library</h1>
-        <div class="add-book-form">
-            <input type="text" id="book-title" placeholder="Book Title">
-            <input type="text" id="book-url" placeholder="URL (https://...)">
-            <button onclick="addNewBook()">+ Add Book</button>
-        </div>
-        <div class="search-container">
-            <input type="text" id="search-input" placeholder="🔍 Search your shelf..." oninput="renderBooks()">
-        </div>
-        <div class="backup-controls">
-            <button onclick="exportData()" class="secondary-btn">📥 Download Backup</button>
-            <label for="import-file" class="secondary-btn">📤 Restore Backup</label>
-            <input type="file" id="import-file" style="display:none" onchange="importData(event)">
+        <h1>🖼️ My Visual Library</h1>
+        <div class="controls-grid">
+            <div class="add-form">
+                <input type="text" id="book-title" placeholder="Title">
+                <input type="text" id="book-url" placeholder="URL (https://...)">
+                <button onclick="addNewBook()">+ Add Book</button>
+            </div>
+            <input type="text" id="search-input" placeholder="🔍 Search library..." oninput="renderBooks()">
         </div>
     </header>
 
-    <div id="stats-bar" class="stats-container">
-        <div class="stat-item">
-            <span class="stat-value" id="total-books">0</span>
-            <span class="stat-label">Total Books</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-value" id="in-progress-books">0</span>
-            <span class="stat-label">In Progress</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-value" id="finished-books">0</span>
-            <span class="stat-label">Finished</span>
-        </div>
+    <div class="stats-bar">
+        <div><b id="total-books">0</b> Books</div>
+        <div><b id="finished-books">0</b> Finished</div>
     </div>
 
-    <div class="library-room">
-        <main id="bookshelf" class="shelf-container"></main>
-    </div>
+    <main id="bookshelf" class="cover-grid">
+        <!-- Book covers appear here -->
+    </main>
 
-    <!-- Fullscreen Reader + Notes -->
+    <!-- Reader Overlay -->
     <div id="reader-overlay" class="overlay hidden">
-        <div class="reader-controls">
-            <button class="close-btn" onclick="closeReader()">✕ Save & Close</button>
+        <div class="reader-header">
+            <button onclick="closeReader()">✕ Close</button>
             <span id="current-book-title"></span>
-            <div class="reader-actions">
-                 <small>Progress:</small>
-                 <input type="number" id="reader-progress-input" min="0" max="100"> %
+            <div class="progress-edit">
+                 Progress: <input type="number" id="reader-progress" min="0" max="100">%
             </div>
         </div>
-        <div class="reader-layout">
-            <iframe id="book-frame" src="" frameborder="0"></iframe>
-            <div class="notes-sidebar">
-                <h3>📝 Study Notes</h3>
-                <textarea id="book-notes" placeholder="Type your notes here... they save automatically!"></textarea>
-            </div>
-        </div>
+        <iframe id="book-frame" src=""></iframe>
     </div>
 
     <script src="script.js"></script>
