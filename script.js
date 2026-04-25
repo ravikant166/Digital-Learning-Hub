@@ -56,16 +56,26 @@ function closeReader() {
 
 function renderBooks() {
     const shelf = document.getElementById('bookshelf');
+    const searchTerm = document.getElementById('search-input').value.toLowerCase();
     shelf.innerHTML = '';
 
-    books.forEach((book, index) => {
+    // Filter books based on search term
+    const filteredBooks = books.filter(book => 
+        book.title.toLowerCase().includes(searchTerm)
+    );
+
+    // Use filteredBooks for the display loop
+    filteredBooks.forEach((book) => {
+        // We need the original index for deleting/opening
+        const originalIndex = books.indexOf(book); 
+        
         const card = document.createElement('div');
         card.className = 'book-card';
         card.style.backgroundColor = book.color;
-        card.onclick = () => openReader(index);
+        card.onclick = () => openReader(originalIndex);
         
         card.innerHTML = `
-            <button class="delete-btn" onclick="deleteBook(${index}, event)">DEL</button>
+            <button class="delete-btn" onclick="deleteBook(${originalIndex}, event)">DEL</button>
             <h3>${book.title}</h3>
             <div>
                 <center><small>${book.progress}%</small></center>
@@ -76,6 +86,11 @@ function renderBooks() {
         `;
         shelf.appendChild(card);
     });
+
+    // Show a message if no books match
+    if (filteredBooks.length === 0 && searchTerm !== "") {
+        shelf.innerHTML = `<p style="color: white; width: 100%; text-align: center;">No books found matching "${searchTerm}"</p>`;
+    }
 }
 
 // Initial Run

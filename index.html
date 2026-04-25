@@ -15,7 +15,12 @@
             <input type="text" id="book-url" placeholder="URL (https://...)">
             <button onclick="addNewBook()">+ Add Book</button>
         </div>
+        <!-- New Search Bar -->
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="🔍 Search your shelf..." oninput="renderBooks()">
+        </div>
     </header>
+    
 
     <div class="library-room">
         <main id="bookshelf" class="shelf-container">
