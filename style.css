@@ -157,3 +157,31 @@ button {
     box-shadow: 0 0 8px rgba(93, 64, 55, 0.4);
 }
 
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    background: #fff;
+    padding: 15px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.stat-item {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #5d4037;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #757575;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+

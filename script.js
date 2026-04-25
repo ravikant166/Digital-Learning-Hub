@@ -91,6 +91,56 @@ function renderBooks() {
     if (filteredBooks.length === 0 && searchTerm !== "") {
         shelf.innerHTML = `<p style="color: white; width: 100%; text-align: center;">No books found matching "${searchTerm}"</p>`;
     }
+
+    // New function to update the dashboard numbers
+function updateStats() {
+    const total = books.length;
+    const finished = books.filter(b => parseInt(b.progress) === 100).length;
+    const inProgress = books.filter(b => parseInt(b.progress) > 0 && parseInt(b.progress) < 100).length;
+
+    document.getElementById('total-books').innerText = total;
+    document.getElementById('in-progress-books').innerText = inProgress;
+    document.getElementById('finished-books').innerText = finished;
+}
+
+// Update your existing renderBooks function to call updateStats()
+function renderBooks() {
+    const shelf = document.getElementById('bookshelf');
+    const searchTerm = document.getElementById('search-input').value.toLowerCase();
+    shelf.innerHTML = '';
+
+    // First, update the dashboard numbers
+    updateStats();
+
+    const filteredBooks = books.filter(book => 
+        book.title.toLowerCase().includes(searchTerm)
+    );
+
+    filteredBooks.forEach((book) => {
+        const originalIndex = books.indexOf(book); 
+        const card = document.createElement('div');
+        card.className = 'book-card';
+        
+        // Add a "Finished" ribbon if 100%
+        const isFinished = parseInt(book.progress) === 100;
+        card.style.backgroundColor = isFinished ? '#4CAF50' : (book.color || '#2c3e50');
+        
+        card.onclick = () => openReader(originalIndex);
+        
+        card.innerHTML = `
+            <button class="delete-btn" onclick="deleteBook(${originalIndex}, event)">DEL</button>
+            <h3>${book.title} ${isFinished ? '✅' : ''}</h3>
+            <div>
+                <center><small>${book.progress}%</small></center>
+                <div class="progress-spine">
+                    <div class="progress-fill" style="width: ${book.progress}%"></div>
+                </div>
+            </div>
+        `;
+        shelf.appendChild(card);
+    });
+}
+
 }
 
 // Initial Run
