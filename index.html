@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Virtual Library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>📚 My Data Science Library</h1>
+        <div class="add-book-form">
+            <input type="text" id="book-title" placeholder="Book Title">
+            <input type="text" id="book-url" placeholder="URL (https://...)">
+            <button onclick="addNewBook()">+ Add Book</button>
+        </div>
+    </header>
+
+    <div class="library-room">
+        <main id="bookshelf" class="shelf-container">
+            <!-- Books injected here -->
+        </main>
+    </div>
+
+    <!-- Fullscreen Reader -->
+    <div id="reader-overlay" class="overlay hidden">
+        <div class="reader-controls">
+            <button class="close-btn" onclick="closeReader()">✕ Close Reader</button>
+            <span id="current-book-title"></span>
+            <div class="reader-actions">
+                 <small>Update Progress:</small>
+                 <input type="number" id="reader-progress-input" min="0" max="100"> %
+            </div>
+        </div>
+        <iframe id="book-frame" src="" frameborder="0"></iframe>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
